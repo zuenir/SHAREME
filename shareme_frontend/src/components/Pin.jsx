@@ -13,7 +13,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const user = fetchUser();
 
   const alreadySaved = !!save?.fileter(
-    (item) => item.postedBy._id === user.googleId
+    (item) => item.postedBy._id === user?.googleId
   )?.length;
   const savePin = (id) => {
     if (!alreadySaved) {
@@ -23,10 +23,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         .insert("after", "save[-1]", [
           {
             _key: uuidy4(),
-            userId: user.googleId,
+            userId: user?.googleId,
             postedBy: {
               _type: `postedBy`,
-              _ref: user.googleId,
+              _ref: user?.googleId,
             },
           },
         ])
@@ -139,5 +139,3 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 };
 
 export default Pin;
-
-//2:24:31
